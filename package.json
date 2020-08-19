@@ -19,8 +19,7 @@
     "build": "yarn initInfo && cross-env NODE_ENV=production rollup -c && node ./scripts/build-zip.js",
     "commit": "git-cz",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
-    "version": "yarn initInfo && yarn changelog && git add CHANGELOG.md src/info.json && yarn release",
-    "release": "git push --follow-tags"
+    "version": "yarn initInfo && yarn changelog && git add CHANGELOG.md src/info.json"
   },
   "config": {
     "commitizen": {
