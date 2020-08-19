@@ -1,0 +1,72 @@
+{
+  "name": "@feq/bobplugin-google-translate",
+  "version": "0.1.0",
+  "description": "Bob google 翻译插件",
+  "homepage": "https://github.com/roojay520/bobplugin-google-translate",
+  "repository": "https://github.com/roojay520/bobplugin-google-translate.git",
+  "author": "roojay <roojay520@gmail.com>",
+  "license": "MIT",
+  "main": "src/main.js",
+  "keywords": [
+    "bobplugin",
+    "translate",
+    "google-translate"
+  ],
+  "scripts": {
+    "initInfo": "node ./scripts/init-info.js",
+    "install": "yarn initInfo",
+    "dev": "rollup -c --watch",
+    "build": "yarn initInfo && cross-env NODE_ENV=production rollup -c && node ./scripts/build-zip.js",
+    "commit": "git-cz",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
+    "version": "yarn initInfo && yarn changelog && git add CHANGELOG.md src/info.json && yarn release",
+    "release": "git push --follow-tags"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-customizable"
+    },
+    "cz-customizable": {
+      "config": ".cz-config.js"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "**/*.{js, json}": "prettier --write"
+  },
+  "dependencies": {
+    "querystring": "^0.2.0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^9.1.2",
+    "@rollup/plugin-commonjs": "^15.0.0",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-node-resolve": "^9.0.0",
+    "adm-zip": "^0.4.16",
+    "commitizen": "^4.1.2",
+    "commitlint-config-cz": "^0.13.1",
+    "conventional-changelog-cli": "^2.1.0",
+    "cross-env": "^7.0.2",
+    "cz-customizable": "^6.3.0",
+    "esbuild": "^0.6.26",
+    "eslint": "^7.7.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "fs-extra": "^9.0.1",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.11",
+    "prettier": "^2.0.5",
+    "rollup": "^2.26.3",
+    "rollup-plugin-copy": "^3.3.0",
+    "rollup-plugin-esbuild": "^2.4.2",
+    "rollup-plugin-node-builtins": "^2.1.2",
+    "rollup-plugin-node-globals": "^1.4.0"
+  }
+}
