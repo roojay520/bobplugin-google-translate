@@ -7,9 +7,8 @@ import globals from 'rollup-plugin-node-globals';
 import builtins from 'rollup-plugin-node-builtins';
 import resolve from '@rollup/plugin-node-resolve';
 import copy from 'rollup-plugin-copy';
-import plugInfo from './src/info.json';
 
-const pkg = `${plugInfo.name}.bobplugin`;
+const pkg = 'google-translate.bobplugin';
 
 export default {
   input: path.join(__dirname, './src/main.js'),
