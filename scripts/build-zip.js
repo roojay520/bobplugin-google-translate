@@ -2,8 +2,9 @@ const path = require('path');
 const AdmZip = require('adm-zip');
 const plugInfo = require('../src/info.json');
 
-const pkg = path.resolve(__dirname, `../release/${plugInfo.name}-v${plugInfo.version}.bobplugin`);
+const pkgName = 'google-translate';
+const pkg = path.resolve(__dirname, `../release/${pkgName}-v${plugInfo.version}.bobplugin`);
 
 const zip = new AdmZip();
-zip.addLocalFolder(path.resolve(__dirname, `../dist/${plugInfo.name}.bobplugin`));
+zip.addLocalFolder(path.resolve(__dirname, `../dist/${pkgName}.bobplugin`));
 zip.writeZip(pkg);
