@@ -1,5 +1,8 @@
 export var ServerErrorType = ['unknown', 'param', 'unsupportLanguage', 'secretKey', 'network', 'api'];
 
+// eslint-disable-next-line prettier/prettier, max-len
+export var userAgent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.125 Safari/537.36';
+
 /**
  * @description 生成一个符合插件格式的错误信息
  * @param {string} [type='unknown' | 'param' | 'unsupportLanguage' | 'secretKey' | 'network' | 'api']
@@ -45,4 +48,5 @@ export default {
   deepClone,
   getType,
   asyncTo,
+  userAgent,
 };

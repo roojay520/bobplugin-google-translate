@@ -79,9 +79,17 @@ async function updateTKK(opts) {
   if (Number(window.TKK.split('.')[0]) === now) {
     return;
   }
-  const { tld = 'cn' } = opts;
+  const { tld = 'cn', timeout = 10000 } = opts;
 
-  const [err, res] = await util.asyncTo($http.get({ url: `https://translate.google.${tld}`, timeout: 10000 }));
+  const [err, res] = await util.asyncTo(
+    $http.get({
+      url: `https://translate.google.${tld}`,
+      timeout,
+      headers: {
+        'User-Agent': util.userAgent,
+      },
+    }),
+  );
   if (err) throw util.getError('network', '秘钥接口网络错误', err);
   if (!res || res.error) throw util.getError('api', '秘钥返回数据出错', res);
 
@@ -108,19 +116,22 @@ async function getToken(text, opts) {
  * @return {string} 识别的语言类型
  */
 async function _detect(text, options = {}) {
-  const { tld = 'cn' } = options;
+  const { tld = 'cn', timeout = 10000 } = options;
   const query = {
     client: 'gtx',
     sl: 'auto',
     dj: '1',
     ie: 'UTF-8',
     oe: 'UTF-8',
-    q: text,
   };
   const [err, res] = await util.asyncTo(
-    $http.get({
+    $http.post({
       url: `https://translate.google.${tld}/translate_a/single?${querystring.stringify(query)}`,
-      timeout: 1000,
+      timeout,
+      headers: {
+        'User-Agent': util.userAgent,
+      },
+      body: { q: text },
     }),
   );
   if (err) $log.error(err);
@@ -151,6 +162,9 @@ function _audio(text, options = {}) {
 }
 
 var resultCache = new CacheResult();
+// 接口请求频率过快导致错误, 隔三分钟再请求
+var API_LIMIT_TIME = 1000 * 60 * 3;
+var apiLimitErrorTime = 0;
 /**
  * @description google 翻译
  * @param {string} text 需要翻译的文字内容
@@ -158,7 +172,9 @@ var resultCache = new CacheResult();
  * @return {object} 一个符合 bob 识别的翻译结果对象
  */
 async function _translate(text, options = {}) {
-  const { from = 'auto', to = 'auto', tld = 'cn', cache = true } = options;
+  if (apiLimitErrorTime + API_LIMIT_TIME > Date.now()) throw util.getError('api', '请求频率过快, 请稍后再试');
+  apiLimitErrorTime = 0;
+  const { from = 'auto', to = 'auto', tld = 'cn', cache = true, timeout = 10000 } = options;
   if (cache) {
     const _cacheData = resultCache.get(text);
     if (_cacheData) return _cacheData;
@@ -178,19 +194,28 @@ async function _translate(text, options = {}) {
     ssel: 0,
     tsel: 0,
     kc: 7,
-    q: text,
     [token.name]: token.value,
   };
 
   const [err, res] = await util.asyncTo(
-    $http.get({
+    $http.post({
       url: `https://translate.google.${tld}/translate_a/single?${querystring.stringify(data)}`,
-      timeout: 10000,
+      timeout,
+      headers: {
+        'User-Agent': util.userAgent,
+      },
+      body: { q: text },
     }),
   );
+  if (res?.response.statusCode === 429) {
+    apiLimitErrorTime = Date.now();
+    throw util.getError('api', '接口请求频率过快', err);
+  }
+
   if (err) throw util.getError('network', '接口网络错误', err);
 
   const resData = res.data;
+  $log.info(JSON.stringify(res));
   if (!util.isArray(resData)) throw util.getError('api', '接口返回数据出错', res);
 
   const result = {
