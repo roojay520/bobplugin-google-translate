@@ -174,10 +174,12 @@ var apiLimitErrorTime = 0;
 async function _translate(text, options = {}) {
   if (apiLimitErrorTime + API_LIMIT_TIME > Date.now()) throw util.getError('api', '请求频率过快, 请稍后再试');
   apiLimitErrorTime = 0;
-  const { from = 'auto', to = 'auto', tld = 'cn', cache = true, timeout = 10000 } = options;
-  if (cache) {
+  const { from = 'auto', to = 'auto', tld = 'cn', cache = 'enable', timeout = 10000 } = options;
+  if (cache === 'enable') {
     const _cacheData = resultCache.get(text);
     if (_cacheData) return _cacheData;
+  } else {
+    resultCache.clear();
   }
 
   const lang = await _detect(text, options);
@@ -230,13 +232,18 @@ async function _translate(text, options = {}) {
   };
 
   try {
-    const [paragraph, dict] = resData;
-    if (util.isArrayAndLenGt(paragraph, 1)) {
-      if (util.isArrayAndLenGt(paragraph[0], 1)) {
-        const [targetStr, sourceStr] = paragraph[0];
-        if (util.isString(targetStr)) result.toParagraphs.push(targetStr);
-        if (util.isString(sourceStr)) result.fromParagraphs.push(sourceStr);
-      }
+    const [paragraphs, dict] = resData;
+    if (util.isArrayAndLenGt(paragraphs, 1)) {
+      let _paragraphs = '';
+      let _fromParagraphs = '';
+      paragraphs.slice(0, -1).forEach((_paragraph) => {
+        if (!util.isArrayAndLenGt(_paragraph, 1)) return;
+        const [targetStr, sourceStr] = _paragraph;
+        if (util.isString(targetStr)) _paragraphs += targetStr;
+        if (util.isString(sourceStr)) _fromParagraphs += sourceStr;
+      });
+      result.toParagraphs = _paragraphs.split('\n');
+      result.fromParagraphs = _fromParagraphs.split('\n');
     }
     if (util.isArrayAndLenGt(dict, 0)) {
       result.toDict = { parts: [], phonetics: [] };
@@ -253,7 +260,7 @@ async function _translate(text, options = {}) {
     throw util.getError('api', '接口返回数据解析错误出错', error);
   }
 
-  if (cache) {
+  if (cache === 'enable') {
     resultCache.set(text, result);
   }
   // raw

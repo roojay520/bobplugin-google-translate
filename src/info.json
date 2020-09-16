@@ -13,15 +13,15 @@
       "identifier": "cache",
       "type": "menu",
       "title": "缓存",
-      "defaultValue": "true",
+      "defaultValue": "enable",
       "menuValues": [
         {
           "title": "开启",
-          "value": "true"
+          "value": "enable"
         },
         {
           "title": "关闭",
-          "value": "false"
+          "value": "disable"
         }
       ]
     },

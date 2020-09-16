@@ -65,4 +65,8 @@ export default class ResultCache {
 
     this._save();
   }
+
+  clear() {
+    this._resultCacheStore.clear();
+  }
 }
