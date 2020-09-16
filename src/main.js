@@ -2,7 +2,7 @@ import GoogleTranslate from './google-translate';
 import _lang from './lang';
 import util from './util';
 
-var startCase = require('./libs/lodash-startcase');
+var humanizeString = require('./libs/human-string');
 
 function supportLanguages() {
   return [..._lang];
@@ -20,7 +20,7 @@ function supportLanguages() {
 
 function translate(query, completion) {
   const { text = '', detectFrom, detectTo } = query;
-  const str = startCase(text);
+  const str = humanizeString(text);
   const params = { from: detectFrom, to: detectTo, tld: $option.tld, cache: $option.cache };
   GoogleTranslate._translate(str, params)
     .then((result) => completion({ result }))
