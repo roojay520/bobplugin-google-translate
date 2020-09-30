@@ -18,6 +18,8 @@
     "install": "yarn initInfo",
     "dev": "cross-env NODE_ENV=development rollup -c rollup.config.js --watch",
     "build": "yarn initInfo && cross-env NODE_ENV=production rollup -c && node ./scripts/build-zip.js",
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "tsc --noEmit --watch",
     "prettier:fix": "prettier --config .prettierrc.js --write .",
     "eslint": "eslint . -c .eslintrc.js --ext .ts,.tsx,.js",
     "eslint:fix": "eslint . -c .eslintrc.js --fix --ext .ts,.tsx,.js",
@@ -40,7 +42,8 @@
     }
   },
   "lint-staged": {
-    "**/*.{js, json}": [
+    "**/*.{js, ts, json}": [
+      "yarn run type-check",
       "yarn run prettier:fix",
       "yarn run eslint:fix"
     ]
