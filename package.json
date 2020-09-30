@@ -13,10 +13,14 @@
     "google-translate"
   ],
   "scripts": {
+    "clear": "rimraf ./dist",
     "initInfo": "node ./scripts/init-info.js",
     "install": "yarn initInfo",
-    "dev": "rollup -c --watch",
+    "dev": "cross-env NODE_ENV=development rollup -c rollup.config.js --watch",
     "build": "yarn initInfo && cross-env NODE_ENV=production rollup -c && node ./scripts/build-zip.js",
+    "prettier:fix": "prettier --config .prettierrc.js --write .",
+    "eslint": "eslint . -c .eslintrc.js --ext .ts,.tsx,.js",
+    "eslint:fix": "eslint . -c .eslintrc.js --fix --ext .ts,.tsx,.js",
     "commit": "git-cz",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
     "version": "yarn initInfo && yarn changelog && git add CHANGELOG.md src/info.json"
@@ -36,36 +40,45 @@
     }
   },
   "lint-staged": {
-    "**/*.{js, json}": "prettier --write"
+    "**/*.{js, json}": [
+      "yarn run prettier:fix",
+      "yarn run eslint:fix"
+    ]
   },
   "dependencies": {
-    "querystring": "^0.2.0"
+    "querystring": "^0.2.0",
+    "uuid": "^8.3.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "^9.1.2",
-    "@rollup/plugin-commonjs": "^15.0.0",
+    "@commitlint/cli": "^11.0.0",
+    "@rollup/plugin-commonjs": "^15.1.0",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^9.0.0",
+    "@types/eslint-plugin-prettier": "^3.1.0",
+    "@types/uuid": "^8.3.0",
+    "@typescript-eslint/eslint-plugin": "^4.2.0",
+    "@typescript-eslint/parser": "^4.2.0",
     "adm-zip": "^0.4.16",
-    "commitizen": "^4.1.2",
-    "commitlint-config-cz": "^0.13.1",
+    "commitizen": "^4.2.1",
+    "commitlint-config-cz": "^0.13.2",
     "conventional-changelog-cli": "^2.1.0",
     "cross-env": "^7.0.2",
     "cz-customizable": "^6.3.0",
-    "esbuild": "^0.6.26",
-    "eslint": "^7.7.0",
-    "eslint-config-airbnb-base": "^14.2.0",
-    "eslint-config-prettier": "^6.11.0",
-    "eslint-plugin-import": "^2.22.0",
+    "esbuild": "^0.7.7",
+    "eslint": "^7.10.0",
+    "eslint-config-airbnb-typescript": "^10.0.0",
+    "eslint-import-resolver-typescript": "^2.3.0",
+    "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-prettier": "^3.1.4",
     "fs-extra": "^9.0.1",
-    "husky": "^4.2.5",
-    "lint-staged": "^10.2.11",
-    "prettier": "^2.0.5",
-    "rollup": "^2.26.3",
+    "husky": "^4.3.0",
+    "lint-staged": "^10.4.0",
+    "prettier": "^2.1.2",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.28.2",
     "rollup-plugin-copy": "^3.3.0",
-    "rollup-plugin-esbuild": "^2.4.2",
-    "rollup-plugin-node-builtins": "^2.1.2",
-    "rollup-plugin-node-globals": "^1.4.0"
+    "rollup-plugin-esbuild": "^2.5.0",
+    "rollup-plugin-node-polyfills": "^0.2.1",
+    "typescript": "^4.0.3"
   }
 }

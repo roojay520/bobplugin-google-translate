@@ -2,7 +2,7 @@ name: Release
 on:
   push:
     tags:
-    - '*'
+      - '*'
 
 jobs:
   build:
@@ -20,5 +20,5 @@ jobs:
 
       - uses: ncipollo/release-action@v1
         with:
-          artifacts: "release/*.bobplugin"
+          artifacts: 'release/*.bobplugin'
           token: ${{ secrets.GIT_TOKEN }}

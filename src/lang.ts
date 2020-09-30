@@ -1,4 +1,4 @@
-var _lang = [
+var languages: Bob.Languages = [
   'auto',
   'zh-Hans',
   'zh-Hant',
@@ -124,4 +124,5 @@ var _lang = [
   'yua',
   'zu',
 ];
-export default _lang;
+
+export default languages;
