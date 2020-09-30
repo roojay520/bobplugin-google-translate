@@ -20,7 +20,7 @@ export default {
     copy({
       targets: [
         { src: './src/info.json', dest: `dist/${pkg}/` },
-        { src: './src/libs', dest: `dist/${pkg}/libs` },
+        { src: './src/libs', dest: `dist/${pkg}/` },
       ],
     }),
     json({ namedExports: false }),
