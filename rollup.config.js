@@ -46,5 +46,5 @@ export default {
       },
     }),
   ],
-  external: ['crypto-js', '$http', '$info', '$option', '$log', '$data', '$file'],
+  external: ['crypto-js', '$util', '$http', '$info', '$option', '$log', '$data', '$file'],
 };
