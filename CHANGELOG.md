@@ -1,3 +1,12 @@
+## [0.2.1](https://github.com/roojay520/bobplugin-google-translate/compare/v0.2.0...v0.2.1) (2020-09-30)
+
+
+### Bug Fixes
+
+* 修复 libs 打包问题 ([baca2f1](https://github.com/roojay520/bobplugin-google-translate/commit/baca2f1d450aad92e7e724352c928c6e7ee9176c))
+
+
+
 # [0.2.0](https://github.com/roojay520/bobplugin-google-translate/compare/v0.1.3...v0.2.0) (2020-09-30)
 
 
