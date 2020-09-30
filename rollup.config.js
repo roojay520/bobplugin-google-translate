@@ -36,7 +36,7 @@ export default {
       include: /\.[jt]?s$/, // default, inferred from `loaders` option
       exclude: /node_modules/, // default
       sourceMap: false, // default
-      // minify: process.env.NODE_ENV === 'production',
+      minify: process.env.NODE_ENV === 'production',
       target: 'es6', // default, or 'es20XX', 'esnext',
       // Add extra loaders
       loaders: {

@@ -13,11 +13,11 @@
     "google-translate"
   ],
   "scripts": {
-    "clear": "rimraf ./dist",
+    "clear": "rimraf ./dist && rimraf ./release",
     "initInfo": "node ./scripts/init-info.js",
-    "install": "yarn initInfo",
+    "install": "npm run initInfo",
     "dev": "cross-env NODE_ENV=development rollup -c rollup.config.js --watch",
-    "build": "yarn initInfo && cross-env NODE_ENV=production rollup -c && node ./scripts/build-zip.js",
+    "build": "npm run clear && npm run initInfo && cross-env NODE_ENV=production rollup -c && node ./scripts/build-zip.js",
     "type-check": "tsc --noEmit",
     "type-check:watch": "tsc --noEmit --watch",
     "prettier:fix": "prettier --config .prettierrc.js --write .",
@@ -25,7 +25,7 @@
     "eslint:fix": "eslint . -c .eslintrc.js --fix --ext .ts,.tsx,.js",
     "commit": "git-cz",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
-    "version": "yarn initInfo && yarn changelog && git add CHANGELOG.md src/info.json"
+    "version": "npm run initInfo && npm run changelog && git add CHANGELOG.md src/info.json"
   },
   "config": {
     "commitizen": {
@@ -43,9 +43,9 @@
   },
   "lint-staged": {
     "**/*.{js, ts, json}": [
-      "yarn run type-check",
-      "yarn run prettier:fix",
-      "yarn run eslint:fix"
+      "npm run type-check",
+      "npm run prettier:fix",
+      "npm run eslint:fix"
     ]
   },
   "dependencies": {
