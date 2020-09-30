@@ -1,3 +1,7 @@
+# [0.2.0](https://github.com/roojay520/bobplugin-google-translate/compare/v0.1.3...v0.2.0) (2020-09-30)
+
+
+
 ## [0.1.3](https://github.com/roojay520/bobplugin-google-translate/compare/v0.1.2...v0.1.3) (2020-09-16)
 
 ### Bug Fixes
