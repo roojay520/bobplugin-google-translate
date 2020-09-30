@@ -1,3 +1,12 @@
+## [0.2.2](https://github.com/roojay520/bobplugin-google-translate/compare/v0.2.1...v0.2.2) (2020-09-30)
+
+
+### Bug Fixes
+
+* 修正 http hander 字段 ([57190e0](https://github.com/roojay520/bobplugin-google-translate/commit/57190e071344d9c5f59a5a3487a48bc7f81f5800))
+
+
+
 ## [0.2.1](https://github.com/roojay520/bobplugin-google-translate/compare/v0.2.0...v0.2.1) (2020-09-30)
 
 
