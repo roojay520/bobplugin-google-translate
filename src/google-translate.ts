@@ -33,7 +33,7 @@ async function _detect(text: string, options: QueryOption = {}) {
     Bob.$http.post({
       url: `https://translate.google.${tld}/translate_a/single?${querystring.stringify(query)}`,
       timeout,
-      headers: { 'User-Agent': Bob.util.userAgent },
+      header: { 'User-Agent': Bob.util.userAgent },
       body: { q: text },
     }),
   );
@@ -109,7 +109,7 @@ async function _translate(text: string, options: QueryOption = {}) {
     Bob.$http.post({
       url: `https://translate.google.${tld}/translate_a/single?${querystring.stringify(data)}`,
       timeout,
-      headers: {
+      header: {
         'User-Agent': Bob.util.userAgent,
       },
       body: { q: text },

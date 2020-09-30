@@ -219,7 +219,7 @@ declare namespace Bob {
   interface HttpRequestConfig {
     url: string;
     method?: HttpMethod;
-    headers?: any;
+    header?: any;
     params?: any;
     body?: any;
     files?: HttpRequestFiles;
