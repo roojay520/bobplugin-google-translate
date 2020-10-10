@@ -1,6 +1,3 @@
-/**
- * https://github.com/vitalets/google-translate-token/blob/master/index.js
- */
 import querystring from 'querystring';
 import Bob from './bob';
 import { getToken } from './google-token';

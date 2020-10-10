@@ -1,5 +1,7 @@
 import Bob from './bob';
-
+/**
+ * https://github.com/vitalets/google-translate-token/blob/master/index.js
+ */
 /* eslint-disable */
 /* @ts-ignore  */
 function sM(a) {

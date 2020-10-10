@@ -163,6 +163,7 @@ declare namespace Bob {
     icon?: string; // 插件图标标识符，如果插件根目录有 icon.png 文件，则会将其作为插件图标，不会读取该字段；如果没有，会读取该字段，值可以为 这个图标列表 中所包含的任意一个ID。
     author?: string; // 插件作者。
     homepage?: string; // 插件主页网址。
+    appcast?: string; // 插件发布信息 URL。
     minBobVersion?: string; // 最低支持本插件的 Bob 版本，建议填写您开发插件时候的调试插件的 Bob 版本，目前应该是 0.5.0。
     options?: OptionObject[];
   }
@@ -176,6 +177,19 @@ declare namespace Bob {
     title: string; // 选项名称，用于展示。
     defaultValue?: string; // 默认值。
     menuValues?: MenuObject[]; // type 为 menu 时必须有菜单选项数组，详情见 menu object。
+  }
+
+  // https://ripperhe.gitee.io/bob/#/plugin/quickstart/publish
+  interface Appcast {
+    identifier: string; // 插件的唯一标识符，需和插件 info.json 文件中的唯一标识符一致。
+    versions: Array<VersionObject>; // 版本信息数组，请倒序排列，新版本放前面。具体结构看 version object。
+  }
+  interface VersionObject {
+    version: string; // 版本号，请与对应插件包 info.json 中的信息一致。
+    desc: string; // 插件的更新内容。
+    sha256: string; // 插件包 SHA256 哈希值，会和从 url 中下载的插件包进行校验。
+    url: string; // 插件包下载地址。
+    minBobVersion?: string; // 最低支持本插件的 Bob 版本，请与对应插件包 info.json 中的信息一致。
   }
 
   // https://ripperhe.gitee.io/bob/#/plugin/api/option
