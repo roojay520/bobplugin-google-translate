@@ -1,3 +1,12 @@
+# [0.3.0](https://github.com/roojay520/bobplugin-google-translate/compare/v0.2.2...v0.3.0) (2020-10-10)
+
+
+### Features
+
+* 新增插件检查更新 ([6cffdd4](https://github.com/roojay520/bobplugin-google-translate/commit/6cffdd483bed143ea23e3961ac4837d1f5fc61ec))
+
+
+
 ## [0.2.2](https://github.com/roojay520/bobplugin-google-translate/compare/v0.2.1...v0.2.2) (2020-09-30)
 
 
