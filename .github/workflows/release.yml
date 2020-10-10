@@ -9,6 +9,10 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GIT_TOKEN }}
+
       - uses: actions/setup-node@v2-beta
         with:
           node-version: '12'
@@ -17,9 +21,17 @@ jobs:
         run: |
           yarn install
           yarn run build
-          git add ./src/appcast.json
-          git commit -m "chore: 更新版本文件"
-          git push origin master
+
+      - name: Commit files
+        run: |
+          git config --global user.name 'roojay520'
+          git config --global user.email 'roojay520@users.noreply.github.com'
+          git commit -am "chore: 更新版本文件"
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GIT_TOKEN }}
 
       - uses: ncipollo/release-action@v1
         with:
