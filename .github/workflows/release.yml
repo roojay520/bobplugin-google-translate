@@ -17,6 +17,9 @@ jobs:
         run: |
           yarn install
           yarn run build
+          git add ./src/appcast.json
+          git commit -m "chore: 更新版本文件"
+          git push origin master
 
       - uses: ncipollo/release-action@v1
         with:
