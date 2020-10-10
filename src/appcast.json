@@ -1,4 +1,12 @@
 {
   "identifier": "com.roojay.bobplugin-google-translate",
-  "versions": []
+  "versions": [
+    {
+      "version": "0.3.1",
+      "desc": "https://github.com/roojay520/bobplugin-google-translate/blob/master/CHANGELOG.md",
+      "sha256": "f9b753d894cf076274cd2ce152c3a34bf8266c577e1964e21f52b51e5c865b93",
+      "url": "https://github.fe.workers.dev/roojay520/bobplugin-google-translate/releases/download/v0.3.1/google-translate-v0.3.1.bobplugin",
+      "minBobVersion": "0.5.0"
+    }
+  ]
 }
