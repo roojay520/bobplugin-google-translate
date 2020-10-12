@@ -1,3 +1,12 @@
+## [0.3.2](https://github.com/roojay520/bobplugin-google-translate/compare/v0.3.1...v0.3.2) (2020-10-12)
+
+
+### Bug Fixes
+
+* 修复截图翻译换行失效问题, 优化特殊字符分隔 ([9d368e5](https://github.com/roojay520/bobplugin-google-translate/commit/9d368e5a848359dbe900c72847d6de32823fcbc2))
+
+
+
 ## [0.3.1](https://github.com/roojay520/bobplugin-google-translate/compare/v0.3.0...v0.3.1) (2020-10-10)
 
 
