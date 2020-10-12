@@ -14,11 +14,12 @@ var humanizeString = (input) => {
   if (typeof _input !== 'string') {
     throw new TypeError('Expected a string');
   }
-
-  _input = decamelize(_input);
+  _input = decamelize(_input, '');
   _input = _input
-    .replace(/[_-]+/g, ' ')
-    .replace(/\s{2,}/g, ' ')
+    .replace(/[]+/g, ' ')
+    .replace(/([_-])+/g, ' $1 ')
+    // https://stackoverflow.com/questions/3469080/match-whitespace-but-not-newlines#answer-3469155:~:text=Use%20a%20double%2Dnegative
+    .replace(/[^\S\r\n]{2,}/g, ' ')
     .trim();
   _input = `${_input.charAt(0).toUpperCase()}${_input.slice(1)}`;
 

@@ -2,7 +2,7 @@ import Bob from './bob';
 import _lang from './lang';
 import GoogleTranslate from './google-translate';
 
-var humanizeString = require('./libs/human-string');
+var formatString = require('./libs/human-string');
 
 export function supportLanguages(): Bob.supportLanguages {
   return [..._lang];
@@ -11,7 +11,7 @@ export function supportLanguages(): Bob.supportLanguages {
 // https://ripperhe.gitee.io/bob/#/plugin/quickstart/translate
 export function translate(query: Bob.TranslateQuery, completion: Bob.Completion) {
   const { text = '', detectFrom, detectTo } = query;
-  const str = humanizeString(text);
+  const str = formatString(text);
   const params = { from: detectFrom, to: detectTo, tld: Bob.getOption('tld'), cache: Bob.getOption('cache') };
   GoogleTranslate._translate(str, params)
     .then((result) => completion({ result }))

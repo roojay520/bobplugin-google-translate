@@ -1,6 +1,6 @@
 # bobplugin-google-translate
 
-> 这是一个 [Bob](https://ripperhe.gitee.io/bob/#/) 的一个 google 翻译插件
+> 这是 [Bob](https://ripperhe.gitee.io/bob/#/) 的一个 google 翻译插件
 
 ## 特性
 
