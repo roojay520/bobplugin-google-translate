@@ -1,6 +1,6 @@
-// eslint-disable-next-line max-len
-export var userAgent = `Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.125 Safari/537.36`;
-
+/* eslint-disable max-len */
+export var userAgent = `Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.111 Safari/537.36`;
+export var googleNid = `NID=204=jKqc7wKrG7-x9wg-nlvxczNd7zMMzWF6Ohx0hLu77vL4GAUwQ0xh-mX3xzY1DUyJZhkQ5HCLIKwW4jX39lt7fSREShR45jIJi9Kz52l_XCIl7zP1wGfnaMfy455Dy0YNO1RBrVS46ix4OxSynS5AXGjJnFvbtC8KDRmep5Qx9sw`;
 export function error(
   type: Bob.ServiceErrorType = 'unknown',
   message = '插件出错',
@@ -57,4 +57,5 @@ export default {
   getType,
   asyncTo,
   userAgent,
+  googleNid,
 };

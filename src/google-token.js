@@ -79,7 +79,10 @@ async function updateTKK(opts) {
     Bob.$http.get({
       timeout,
       url: `https://translate.google.${tld}`,
-      headers: { 'User-Agent': Bob.util.userAgent },
+      header: {
+        'User-Agent': Bob.util.userAgent,
+        Cookie: Bob.util.googleNid,
+      },
     }),
   );
   if (err) throw Bob.util.error('network', '秘钥接口网络错误', err);
