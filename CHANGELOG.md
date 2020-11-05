@@ -1,3 +1,12 @@
+## [0.3.3](https://github.com/roojay520/bobplugin-google-translate/compare/v0.3.2...v0.3.3) (2020-11-05)
+
+
+### Bug Fixes
+
+* 修复秘钥获取出错的问题 issues [#3](https://github.com/roojay520/bobplugin-google-translate/issues/3) ([a0cfd05](https://github.com/roojay520/bobplugin-google-translate/commit/a0cfd05ce1a1ad04c0c98bc3c9fbef830f35747f))
+
+
+
 ## [0.3.2](https://github.com/roojay520/bobplugin-google-translate/compare/v0.3.1...v0.3.2) (2020-10-12)
 
 
