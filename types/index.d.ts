@@ -221,15 +221,8 @@ declare namespace Bob {
     | 'post'
     | 'POST'
     | 'put'
-    | 'PUT'
-    | 'patch'
-    | 'PATCH'
-    | 'purge'
-    | 'PURGE'
-    | 'link'
-    | 'LINK'
-    | 'unlink'
-    | 'UNLINK';
+    | 'PUT';
+
   interface HttpRequestConfig {
     url: string;
     method?: HttpMethod;

@@ -1,9 +1,7 @@
 import querystring from 'querystring';
 import Bob from './bob';
-import { getToken } from './google-token';
 
 interface QueryOption {
-  tk?: string;
   timeout?: number;
   to?: Bob.Language;
   from?: Bob.Language;
@@ -48,7 +46,7 @@ async function _detect(text: string, options: QueryOption = {}) {
  * @return {string} tts 音频 url
  */
 function _audio(text: string, options: QueryOption = {}) {
-  const { from, tld = 'cn', tk } = options;
+  const { from, tld = 'cn' } = options;
   const query = {
     client: 'gtx',
     tl: from,
@@ -58,7 +56,6 @@ function _audio(text: string, options: QueryOption = {}) {
     total: 1,
     idx: 0,
     textlen: text.length,
-    tk,
     prev: 'input',
   };
   return `https://translate.google.${tld}/translate_tts?${querystring.stringify(query)}`;
@@ -86,7 +83,6 @@ async function _translate(text: string, options: QueryOption = {}) {
   }
 
   const lang = await _detect(text, options);
-  const token = await getToken(text, { tld });
   const data = {
     client: 'gtx',
     sl: lang || from,
@@ -99,7 +95,6 @@ async function _translate(text: string, options: QueryOption = {}) {
     ssel: 0,
     tsel: 0,
     kc: 7,
-    [token.name]: token.value,
   };
 
   const [err, res] = await Bob.util.asyncTo<Bob.HttpResponse>(
@@ -146,7 +141,7 @@ async function _translate(text: string, options: QueryOption = {}) {
         .map(([part, means]: [string, string[]]) => Bob.util.isArrayAndLenGt(means, 0) && { part, means })
         .filter((item: Bob.PartObject) => !!item);
       if (Bob.util.isArrayAndLenGt(parts, 0)) result.toDict.parts = parts;
-      const ttsUrl = _audio(text, { tld, from: lang || from, tk: token.value });
+      const ttsUrl = _audio(text, { tld, from: lang || from });
       result.fromTTS = { type: 'url', value: ttsUrl };
       result.toDict.phonetics = [{ type: 'us', value: '发音', tts: { type: 'url', value: ttsUrl, raw: {} } }];
     }

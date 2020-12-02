@@ -1,7 +1,7 @@
 interface IBobCore {
   $http: Bob.Http;
   $info: Bob.Info;
-  $option: Bob.Option;
+  // $option: Bob.Option;
   $log: Bob.Log;
   $data: Bob.Data;
   $file: Bob.File;
@@ -11,7 +11,7 @@ interface IBobCore {
 var BobCore: Readonly<IBobCore> = {
   $http,
   // todo: 无法监听变化
-  $option,
+  // $option,
   $info,
   $log,
   $data,
