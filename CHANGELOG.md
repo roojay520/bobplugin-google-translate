@@ -1,3 +1,13 @@
+## [0.3.4](https://github.com/roojay520/bobplugin-google-translate/compare/v0.3.3...v0.3.4) (2020-12-02)
+
+
+### Bug Fixes
+
+* 临时过渡方案, 解决google 接口升级导致token 不可用问题 ([28e4e5d](https://github.com/roojay520/bobplugin-google-translate/commit/28e4e5db5034d0d43abf151443050951ff5fbe5d))
+* 优化结果缓存方式,修复切换源或目标语言时翻译结果不更新的问题 ([f904290](https://github.com/roojay520/bobplugin-google-translate/commit/f904290bdad307e7711e8972e6c34dcd5044909e))
+
+
+
 ## [0.3.3](https://github.com/roojay520/bobplugin-google-translate/compare/v0.3.2...v0.3.3) (2020-11-05)
 
 
