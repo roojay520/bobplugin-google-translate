@@ -75,8 +75,9 @@ async function _translate(text: string, options: QueryOption = {}) {
   if (apiLimitErrorTime + API_LIMIT_TIME > Date.now()) throw Bob.util.error('api', '请求频率过快, 请稍后再试');
   apiLimitErrorTime = 0;
   const { from = 'auto', to = 'auto', tld = 'cn', cache = 'enable', timeout = 10000 } = options;
+  const cacheKey = text + from + to + tld;
   if (cache === 'enable') {
-    const _cacheData = resultCache.get(text);
+    const _cacheData = resultCache.get(cacheKey);
     if (_cacheData) return _cacheData;
   } else {
     resultCache.clear();
@@ -150,7 +151,7 @@ async function _translate(text: string, options: QueryOption = {}) {
   }
 
   if (cache === 'enable') {
-    resultCache.set(text, result);
+    resultCache.set(cacheKey, result);
   }
   // raw
   // result.raw = resData;
