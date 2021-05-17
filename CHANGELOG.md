@@ -1,3 +1,7 @@
+## [0.4.1](https://github.com/roojay520/bobplugin-google-translate/compare/v0.4.0...v0.4.1) (2021-05-17)
+
+
+
 # [0.4.0](https://github.com/roojay520/bobplugin-google-translate/compare/v0.3.5...v0.4.0) (2021-05-17)
 
 
