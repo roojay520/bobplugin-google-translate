@@ -12,7 +12,7 @@ interface QueryOption {
 
 enum Rpc {
   translate = 'MkEWBc',
-  tts = 'jQ1olc'
+  tts = 'jQ1olc',
 }
 
 // 参考自: https://github.com/vitalets/google-translate-api/blob/master/index.js

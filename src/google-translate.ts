@@ -164,8 +164,4 @@ export default {
   _audio,
 };
 
-export {
-  _translate,
-  _detect,
-  _audio,
-};
+export { _translate, _detect, _audio };
