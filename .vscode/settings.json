@@ -1,4 +1,9 @@
 {
   "god.tsconfig": "./tsconfig.json",
-  "cSpell.words": ["addtions", "ssel", "tsel"]
+  "cSpell.words": [
+    "addtions",
+    "reqid",
+    "ssel",
+    "tsel"
+  ]
 }

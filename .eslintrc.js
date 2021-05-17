@@ -29,8 +29,10 @@ module.exports = {
   rules: {
     'no-var': 'off',
     'vars-on-top': 'off',
+    'prefer-const': 'off',
     'no-return-assign': 'off',
     'consistent-return': 'off',
+    'prefer-destructuring': 'off',
     'no-underscore-dangle': 'off',
     'object-curly-newline': 'off',
     'import/no-unresolved': 'error',

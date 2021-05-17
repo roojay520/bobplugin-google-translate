@@ -41,6 +41,22 @@
           "value": "com"
         }
       ]
+    },
+    {
+      "identifier": "version",
+      "type": "menu",
+      "title": "接口版本",
+      "defaultValue": "rpc",
+      "menuValues": [
+        {
+          "title": "旧版",
+          "value": "old"
+        },
+        {
+          "title": "新版(RPC)",
+          "value": "rpc"
+        }
+      ]
     }
   ]
 }

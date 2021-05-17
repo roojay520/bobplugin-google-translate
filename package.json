@@ -18,7 +18,7 @@
     "install": "npm run initInfo",
     "dev": "cross-env NODE_ENV=development rollup -c rollup.config.js --watch",
     "build": "npm run clear && npm run initInfo && cross-env NODE_ENV=production rollup -c && node ./scripts/build-zip.js",
-    "type-check": "tsc --noEmit",
+    "type-check": "tsc --noEmit --allowJs",
     "type-check:watch": "tsc --noEmit --watch",
     "prettier:fix": "prettier --config .prettierrc.js --write .",
     "eslint": "eslint . -c .eslintrc.js --ext .ts,.tsx,.js",

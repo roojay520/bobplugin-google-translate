@@ -163,3 +163,9 @@ export default {
   _detect,
   _audio,
 };
+
+export {
+  _translate,
+  _detect,
+  _audio,
+};

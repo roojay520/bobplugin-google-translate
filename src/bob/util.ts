@@ -51,6 +51,7 @@ export default {
   error,
   isString,
   isArray,
+  isNil,
   isArrayAndLenGt,
   isPlainObject,
   deepClone,
