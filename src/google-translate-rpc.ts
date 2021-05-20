@@ -194,7 +194,12 @@ async function translateByRPC(text: string, opts: QueryOption = {}) {
 
       const ttsUrl = _audio(text, { tld, from: lang || from });
       result.fromTTS = { type: 'url', value: ttsUrl };
-      result.toDict.phonetics = [{ type: 'us', value: 'us', tts: { type: 'url', value: ttsUrl, raw: {} } }];
+      const zh = ['zh-Hans', 'zh-Hant', 'zh-CN'];
+      let pinyin = '发音';
+      if (zh.includes(lang) || zh.includes(from)) {
+        pinyin = data.raw?.[0]?.[0] || '发音';
+      }
+      result.toDict.phonetics = [{ type: 'us', value: pinyin, tts: { type: 'url', value: ttsUrl, raw: {} } }];
     }
   } catch (error) {
     throw Bob.util.error('api', '接口返回数据解析错误出错', error);
