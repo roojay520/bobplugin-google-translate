@@ -1,24 +1,16 @@
 ## [0.4.2](https://github.com/roojay520/bobplugin-google-translate/compare/v0.4.1...v0.4.2) (2021-05-20)
 
-
 ### Features
 
-* 新增汉语拼音注释 ([28c20fa](https://github.com/roojay520/bobplugin-google-translate/commit/28c20facc2dff823d3ccf50cc3e48973650430dc))
-
-
+- 新增汉语拼音注释 ([28c20fa](https://github.com/roojay520/bobplugin-google-translate/commit/28c20facc2dff823d3ccf50cc3e48973650430dc))
 
 ## [0.4.1](https://github.com/roojay520/bobplugin-google-translate/compare/v0.4.0...v0.4.1) (2021-05-17)
 
-
-
 # [0.4.0](https://github.com/roojay520/bobplugin-google-translate/compare/v0.3.5...v0.4.0) (2021-05-17)
-
 
 ### Features
 
-* 新增 RPC 方式调用翻译接口 ([c88266c](https://github.com/roojay520/bobplugin-google-translate/commit/c88266c690b206b096688f5c1d67a736d5e1df82))
-
-
+- 新增 RPC 方式调用翻译接口 ([c88266c](https://github.com/roojay520/bobplugin-google-translate/commit/c88266c690b206b096688f5c1d67a736d5e1df82))
 
 ## [0.3.5](https://github.com/roojay520/bobplugin-google-translate/compare/v0.3.4...v0.3.5) (2020-12-02)
 

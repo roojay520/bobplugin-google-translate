@@ -5,7 +5,7 @@ import json from '@rollup/plugin-json';
 import esbuild from 'rollup-plugin-esbuild';
 import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
-import nodePolyfills from 'rollup-plugin-node-polyfills';
+import nodePolyfills from 'rollup-plugin-polyfill-node';
 
 const pkg = 'google-translate.bobplugin';
 
@@ -27,7 +27,7 @@ export default {
     resolve({
       extensions: ['.js', '.ts'],
       modulesOnly: true,
-      preferBuiltins: true,
+      preferBuiltins: false,
     }),
     commonjs(),
     nodePolyfills(),

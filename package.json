@@ -19,13 +19,14 @@
     "dev": "cross-env NODE_ENV=development rollup -c rollup.config.js --watch",
     "build": "npm run clear && npm run initInfo && cross-env NODE_ENV=production rollup -c && node ./scripts/build-zip.js",
     "type-check": "tsc --noEmit --allowJs",
-    "type-check:watch": "tsc --noEmit --watch",
+    "type-check:watch": "tsc --noEmit --allowJs --watch",
     "prettier:fix": "prettier --config .prettierrc.js --write .",
     "eslint": "eslint . -c .eslintrc.js --ext .ts,.tsx,.js",
     "eslint:fix": "eslint . -c .eslintrc.js --fix --ext .ts,.tsx,.js",
     "commit": "git-cz",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
-    "version": "npm run initInfo && npm run changelog && git add CHANGELOG.md src/info.json"
+    "version": "npm run initInfo && npm run changelog && git add CHANGELOG.md src/info.json",
+    "prepare": "husky install"
   },
   "config": {
     "commitizen": {
@@ -35,53 +36,47 @@
       "config": ".cz-config.js"
     }
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
-  },
   "lint-staged": {
+    "**/*.ts": [
+      "npm run type-check"
+    ],
     "**/*.{js, ts, json}": [
-      "npm run type-check",
       "npm run prettier:fix",
       "npm run eslint:fix"
     ]
   },
   "dependencies": {
-    "querystring": "^0.2.0",
-    "uuid": "^8.3.0"
+    "querystring": "^0.2.1"
   },
   "devDependencies": {
-    "@commitlint/cli": "^11.0.0",
-    "@rollup/plugin-commonjs": "^15.1.0",
+    "@commitlint/cli": "^12.1.4",
+    "@rollup/plugin-commonjs": "^19.0.0",
     "@rollup/plugin-json": "^4.1.0",
-    "@rollup/plugin-node-resolve": "^9.0.0",
+    "@rollup/plugin-node-resolve": "^13.0.0",
     "@types/eslint-plugin-prettier": "^3.1.0",
-    "@types/uuid": "^8.3.0",
-    "@typescript-eslint/eslint-plugin": "^4.2.0",
-    "@typescript-eslint/parser": "^4.2.0",
-    "adm-zip": "^0.4.16",
-    "commitizen": "^4.2.1",
+    "@typescript-eslint/eslint-plugin": "^4.26.0",
+    "@typescript-eslint/parser": "^4.26.0",
+    "adm-zip": "^0.5.5",
+    "commitizen": "^4.2.4",
     "commitlint-config-cz": "^0.13.2",
-    "conventional-changelog-cli": "^2.1.0",
-    "cross-env": "^7.0.2",
+    "conventional-changelog-cli": "^2.1.1",
+    "cross-env": "^7.0.3",
     "cz-customizable": "^6.3.0",
-    "esbuild": "^0.7.7",
-    "eslint": "^7.10.0",
-    "eslint-config-airbnb-typescript": "^10.0.0",
-    "eslint-import-resolver-typescript": "^2.3.0",
-    "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-prettier": "^3.1.4",
-    "fs-extra": "^9.0.1",
-    "husky": "^4.3.0",
-    "lint-staged": "^10.4.0",
-    "prettier": "^2.1.2",
+    "esbuild": "^0.12.5",
+    "eslint": "^7.27.0",
+    "eslint-config-airbnb-typescript": "^12.3.1",
+    "eslint-import-resolver-typescript": "^2.4.0",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-prettier": "^3.4.0",
+    "fs-extra": "^10.0.0",
+    "husky": "^6.0.0",
+    "lint-staged": "^11.0.0",
+    "prettier": "^2.3.0",
     "rimraf": "^3.0.2",
-    "rollup": "^2.28.2",
-    "rollup-plugin-copy": "^3.3.0",
-    "rollup-plugin-esbuild": "^2.5.0",
-    "rollup-plugin-node-polyfills": "^0.2.1",
-    "typescript": "^4.0.3"
+    "rollup": "^2.50.5",
+    "rollup-plugin-copy": "^3.4.0",
+    "rollup-plugin-esbuild": "^4.3.1",
+    "rollup-plugin-polyfill-node": "^0.6.2",
+    "typescript": "^4.3.2"
   }
 }
