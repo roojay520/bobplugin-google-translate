@@ -1,14 +1,8 @@
-import querystring from 'querystring';
-import Bob from './bob';
-import { _detect, _audio } from './google-translate';
-
-interface QueryOption {
-  timeout?: number;
-  to?: Bob.Language;
-  from?: Bob.Language;
-  tld?: string;
-  cache?: string;
-}
+import * as querystring from 'querystring';
+import * as Bob from '@bob-plug/core';
+import { tts as _audio, IQueryOption } from './common';
+import { userAgent } from './util';
+import { noStandardToStandard } from './lang';
 
 enum Rpc {
   translate = 'MkEWBc',
@@ -85,7 +79,7 @@ function parseTranslateRes(text: string) {
 
 function extract(key: string, res: Bob.HttpResponse) {
   const re = new RegExp(`"${key}":".*?"`);
-  const result = re.exec(res.data);
+  const result = re.exec(res.data as string);
   if (result !== null) {
     return result[0].replace(`"${key}":"`, '').slice(0, -1);
   }
@@ -93,7 +87,7 @@ function extract(key: string, res: Bob.HttpResponse) {
 }
 
 var config = new Bob.Cache('google-translate-api');
-async function getRpcParams(rpcids: Rpc, opts: QueryOption) {
+async function getRpcParams(rpcids: Rpc, opts: IQueryOption) {
   const updateTime = Date.now();
   const cacheUpdateTime = 1000 * 60 * 60 * 24 * 1; // 缓存时间一天
   let { translate = {} } = config.getAll();
@@ -103,12 +97,12 @@ async function getRpcParams(rpcids: Rpc, opts: QueryOption) {
   }
   const { tld = 'cn', timeout = 10000 } = opts;
   const [err, res] = await Bob.util.asyncTo<Bob.HttpResponse>(
-    Bob.$http.get({
+    Bob.api.$http.get({
       timeout,
       url: `https://translate.google.${tld}`,
       header: {
-        'User-Agent': Bob.util.userAgent,
-        Cookie: Bob.util.googleNid,
+        'User-Agent': userAgent,
+        Cookie: '',
       },
     }),
   );
@@ -138,7 +132,7 @@ var resultCache = new Bob.CacheResult();
 var API_LIMIT_TIME: number = 1000 * 60 * 3;
 var apiLimitErrorTime = 0;
 
-async function translateByRPC(text: string, opts: QueryOption = {}) {
+async function _translate(text: string, opts: IQueryOption = {}) {
   if (text?.length > 5000) {
     throw Bob.util.error('param', '翻译文本过长, 单次翻译字符上限为5000');
   }
@@ -146,30 +140,26 @@ async function translateByRPC(text: string, opts: QueryOption = {}) {
   const baseApi = `https://translate.google.${tld}`;
   if (apiLimitErrorTime + API_LIMIT_TIME > Date.now()) throw Bob.util.error('api', '请求频率过快, 请稍后再试');
   apiLimitErrorTime = 0;
-  const cacheKey = text + from + to + tld;
+  const cacheKey = `${text}${from}${to}${tld}`;
   if (cache === 'enable') {
     const _cacheData = resultCache.get(cacheKey);
     if (_cacheData) return _cacheData;
   } else {
     resultCache.clear();
   }
-  const lang = await _detect(text, opts);
   const params = await getRpcParams(Rpc.translate, opts);
-  Bob.$log.info(params);
   const url = `${baseApi}/_/TranslateWebserverUi/data/batchexecute?${querystring.stringify(params)}`;
   const [err, res] = await Bob.util.asyncTo<Bob.HttpResponse>(
-    Bob.$http.post({
+    Bob.api.$http.post({
       timeout,
       url,
       header: {
         'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-        'User-Agent': Bob.util.userAgent,
-        Cookie: Bob.util.googleNid,
+        'User-Agent': userAgent,
+        Cookie: '',
       },
       body: {
-        'f.req': JSON.stringify([
-          [[Rpc.translate, JSON.stringify([[text, lang || from, to, true], [null]]), null, 'generic']],
-        ]),
+        'f.req': JSON.stringify([[[Rpc.translate, JSON.stringify([[text, from, to, true], [null]]), null, 'generic']]]),
       },
     }),
   );
@@ -182,8 +172,8 @@ async function translateByRPC(text: string, opts: QueryOption = {}) {
   if (err || !res) throw Bob.util.error('network', '接口网络错误', err);
 
   const resData = res?.data;
-  const data = parseTranslateRes(resData);
-  const result: Bob.Result = { from, to, toParagraphs: [] };
+  const data = parseTranslateRes(resData as string);
+  const result: Bob.Result = { from: noStandardToStandard(from), to: noStandardToStandard(to), toParagraphs: [] };
 
   try {
     result.toParagraphs = [data.text];
@@ -192,11 +182,11 @@ async function translateByRPC(text: string, opts: QueryOption = {}) {
     if (Bob.util.isArrayAndLenGt(dict, 0)) {
       result.toDict = { parts: data.dict.parts, phonetics: [] };
 
-      const ttsUrl = _audio(text, { tld, from: lang || from });
+      const ttsUrl = _audio(text, { tld, from: from });
       result.fromTTS = { type: 'url', value: ttsUrl };
       const zh = ['zh-Hans', 'zh-Hant', 'zh-CN'];
       let pinyin = '发音';
-      if (zh.includes(lang) || zh.includes(from)) {
+      if (zh.includes(from)) {
         pinyin = data.raw?.[0]?.[0] || '发音';
       }
       result.toDict.phonetics = [{ type: 'us', value: pinyin, tts: { type: 'url', value: ttsUrl, raw: {} } }];
@@ -211,4 +201,4 @@ async function translateByRPC(text: string, opts: QueryOption = {}) {
   return result;
 }
 
-export { translateByRPC };
+export { _translate };

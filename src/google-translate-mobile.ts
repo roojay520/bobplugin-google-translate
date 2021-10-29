@@ -1,14 +1,15 @@
+// 此接口来源于: https://github.com/tingv/bobplugin-google-translate/blob/main/src/translate.ts
 import * as querystring from 'querystring';
+import { unescape } from 'lodash-es';
 import * as Bob from '@bob-plug/core';
-import { userAgent } from './util';
-import { IQueryOption, detectLang, tts } from './common';
+import { userAgentMobile } from './util';
+import { IQueryOption } from './common';
 import { noStandardToStandard } from './lang';
 
 var resultCache = new Bob.CacheResult();
 // 接口请求频率过快导致错误, 隔三分钟再请求
 var API_LIMIT_TIME: number = 1000 * 60 * 3;
 var apiLimitErrorTime = 0;
-
 /**
  * @description google 翻译
  * @param {string} text 需要翻译的文字内容
@@ -30,29 +31,20 @@ async function _translate(text: string, options: IQueryOption = {}) {
     resultCache.clear();
   }
 
-  const lang = await detectLang(text, options);
   const data = {
-    client: 'gtx',
-    sl: lang || from,
+    sl: from,
     tl: to,
     hl: to,
-    dt: ['at', 'bd', 'ex', 'ld', 'md', 'qca', 'rw', 'rm', 'ss', 't'],
-    ie: 'UTF-8',
-    oe: 'UTF-8',
-    otf: 1,
-    ssel: 0,
-    tsel: 0,
-    kc: 7,
+    q: text,
   };
 
   const [err, res] = await Bob.util.asyncTo<Bob.HttpResponse>(
-    Bob.api.$http.post({
-      url: `https://translate.google.${tld}/translate_a/single?${querystring.stringify(data)}`,
+    Bob.api.$http.get({
+      url: `https://translate.google.${tld}/m?${querystring.stringify(data)}`,
       timeout,
       header: {
-        'User-Agent': userAgent,
+        'User-Agent': userAgentMobile,
       },
-      body: { q: text },
     }),
   );
   if (res?.response.statusCode === 429) {
@@ -63,36 +55,16 @@ async function _translate(text: string, options: IQueryOption = {}) {
   if (err) throw Bob.util.error('network', '接口网络错误', err);
 
   const resData = res?.data;
-  Bob.api.$log.info(JSON.stringify(res));
-  if (!Bob.util.isArray(resData)) throw Bob.util.error('api', '接口返回数据出错', res);
+  if (!Bob.util.isString(resData)) throw Bob.util.error('api', '接口返回数据出错', res);
 
   const result: Bob.Result = { from: noStandardToStandard(from), to: noStandardToStandard(to), toParagraphs: [] };
 
   try {
-    const [paragraphs, dict] = resData;
-    if (Bob.util.isArrayAndLenGt(paragraphs, 1)) {
-      let _paragraphs = '';
-      let _fromParagraphs = '';
-      paragraphs.slice(0, -1).forEach((_paragraph: string[]) => {
-        if (!Bob.util.isArrayAndLenGt(_paragraph, 1)) return;
-        const [targetStr, sourceStr] = _paragraph;
-        if (Bob.util.isString(targetStr)) _paragraphs += targetStr;
-        if (Bob.util.isString(sourceStr)) _fromParagraphs += sourceStr;
-      });
-      result.toParagraphs = _paragraphs.split('\n');
-      result.fromParagraphs = _fromParagraphs.split('\n');
-    }
-    if (Bob.util.isArrayAndLenGt(dict, 0)) {
-      result.toDict = { parts: [], phonetics: [] };
-      const parts = dict
-        .filter((item: Bob.PartObject) => Bob.util.isArrayAndLenGt(item, 0))
-        .map(([part, means]: [string, string[]]) => Bob.util.isArrayAndLenGt(means, 0) && { part, means })
-        .filter((item: Bob.PartObject) => !!item);
-      if (Bob.util.isArrayAndLenGt(parts, 0)) result.toDict.parts = parts;
-      const ttsUrl = tts(text, { tld, from: lang || from });
-      result.fromTTS = { type: 'url', value: ttsUrl };
-      result.toDict.phonetics = [{ type: 'us', value: '发音', tts: { type: 'url', value: ttsUrl, raw: {} } }];
-    }
+    const resultRegex = /<div[^>]*?class="result-container"[^>]*>[\s\S]*?<\/div>/gi;
+    let _result = resultRegex.exec(resData)?.[0]?.replace(/(<\/?[^>]+>)/gi, '');
+    _result = unescape(_result);
+    result.toParagraphs = _result?.split('\n') || ['暂无结果'];
+    result.fromParagraphs = text.split('\n');
   } catch (error) {
     throw Bob.util.error('api', '接口返回数据解析错误出错', error);
   }

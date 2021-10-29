@@ -46,15 +46,19 @@
       "identifier": "version",
       "type": "menu",
       "title": "接口版本",
-      "defaultValue": "rpc",
+      "defaultValue": "tmp",
       "menuValues": [
         {
-          "title": "旧版",
-          "value": "old"
+          "title": "WEB(国际可用)",
+          "value": "web"
         },
         {
-          "title": "新版(RPC)",
+          "title": "RPC(国内/国际都可用)",
           "value": "rpc"
+        },
+        {
+          "title": "混合版(国内/国际都可用,推荐)",
+          "value": "tmp"
         }
       ]
     }
