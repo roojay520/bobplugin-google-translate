@@ -5,7 +5,7 @@ const package = require('../package.json');
 const plugInfo = require('../src/info.json');
 const plugAppcast = require('../src/appcast.json');
 
-const githubRelease = `https://github-raw.roojay.com/roojay520/bobplugin-google-translate/releases/download`;
+const githubRelease = `https://github.roojay.com/roojay520/bobplugin-google-translate/releases/download`;
 
 module.exports = () => {
   const pkgName = 'google-translate';

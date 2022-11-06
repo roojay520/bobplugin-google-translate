@@ -13,9 +13,9 @@ jobs:
           fetch-depth: 0
           token: ${{ secrets.GIT_TOKEN }}
 
-      - uses: actions/setup-node@v2-beta
+      - uses: actions/setup-node@v3
         with:
-          node-version: '12'
+          node-version: 16
 
       - name: Install Dependencies And Build
         run: |

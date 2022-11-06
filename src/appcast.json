@@ -5,56 +5,56 @@
       "version": "0.6.0",
       "desc": "https://github.com/roojay520/bobplugin-google-translate/blob/master/CHANGELOG.md",
       "sha256": "2f931701d23a1d31a0ca9610b78ec42b9a1060f3eb1f674bc56d06ae592d5ead",
-      "url": "https://github-raw.roojay.com/roojay520/bobplugin-google-translate/releases/download/v0.6.0/google-translate-v0.6.0.bobplugin",
+      "url": "https://github.roojay.com/roojay520/bobplugin-google-translate/releases/download/v0.6.0/google-translate-v0.6.0.bobplugin",
       "minBobVersion": "0.5.0"
     },
     {
       "version": "0.5.0",
       "desc": "https://github.com/roojay520/bobplugin-google-translate/blob/master/CHANGELOG.md",
       "sha256": "a9349c67a6adcaac299c4a335e4d14fefdea4b7ca95d0a7ec6c732fd541881d9",
-      "url": "https://github-raw.roojay.com/roojay520/bobplugin-google-translate/releases/download/v0.5.0/google-translate-v0.5.0.bobplugin",
+      "url": "https://github.roojay.com/roojay520/bobplugin-google-translate/releases/download/v0.5.0/google-translate-v0.5.0.bobplugin",
       "minBobVersion": "0.5.0"
     },
     {
       "version": "0.4.2",
       "desc": "https://github.com/roojay520/bobplugin-google-translate/blob/master/CHANGELOG.md",
       "sha256": "d6260e96c70b40768e053732eff2f4b72dbc4a60dc9ce3bf6222c261e0bc96e8",
-      "url": "https://github-raw.roojay.com/roojay520/bobplugin-google-translate/releases/download/v0.4.2/google-translate-v0.4.2.bobplugin",
+      "url": "https://github.roojay.com/roojay520/bobplugin-google-translate/releases/download/v0.4.2/google-translate-v0.4.2.bobplugin",
       "minBobVersion": "0.5.0"
     },
     {
       "version": "0.4.1",
       "desc": "https://github.com/roojay520/bobplugin-google-translate/blob/master/CHANGELOG.md",
       "sha256": "8e76926967e71545e9a8e706ed263a76cbf78f1d7598ba5db0d47950d6a1cd36",
-      "url": "https://github-raw.roojay.com/roojay520/bobplugin-google-translate/releases/download/v0.4.1/google-translate-v0.4.1.bobplugin",
+      "url": "https://github.roojay.com/roojay520/bobplugin-google-translate/releases/download/v0.4.1/google-translate-v0.4.1.bobplugin",
       "minBobVersion": "0.5.0"
     },
     {
       "version": "0.3.5",
       "desc": "https://github.com/roojay520/bobplugin-google-translate/blob/master/CHANGELOG.md",
       "sha256": "77b2dfe1491acb14bd3e65a2e58d58a4746a36764b7bd0c2d0d299069855a8e4",
-      "url": "https://github-raw.roojay.com/roojay520/bobplugin-google-translate/releases/download/v0.3.5/google-translate-v0.3.5.bobplugin",
+      "url": "https://github.roojay.com/roojay520/bobplugin-google-translate/releases/download/v0.3.5/google-translate-v0.3.5.bobplugin",
       "minBobVersion": "0.5.0"
     },
     {
       "version": "0.3.3",
       "desc": "https://github.com/roojay520/bobplugin-google-translate/blob/master/CHANGELOG.md",
       "sha256": "96920c6ada9575cac8a140107f7caafba36f9a294f1d05c687c25b49ecfe0a3a",
-      "url": "https://github-raw.roojay.com/roojay520/bobplugin-google-translate/releases/download/v0.3.3/google-translate-v0.3.3.bobplugin",
+      "url": "https://github.roojay.com/roojay520/bobplugin-google-translate/releases/download/v0.3.3/google-translate-v0.3.3.bobplugin",
       "minBobVersion": "0.5.0"
     },
     {
       "version": "0.3.2",
       "desc": "https://github.com/roojay520/bobplugin-google-translate/blob/master/CHANGELOG.md",
       "sha256": "0a9c9ecd06542a0cf8d192de1dbc3fc8b6133963d7851173ae34d5392cd243f0",
-      "url": "https://github-raw.roojay.com/roojay520/bobplugin-google-translate/releases/download/v0.3.2/google-translate-v0.3.2.bobplugin",
+      "url": "https://github.roojay.com/roojay520/bobplugin-google-translate/releases/download/v0.3.2/google-translate-v0.3.2.bobplugin",
       "minBobVersion": "0.5.0"
     },
     {
       "version": "0.3.1",
       "desc": "https://github.com/roojay520/bobplugin-google-translate/blob/master/CHANGELOG.md",
       "sha256": "f9b753d894cf076274cd2ce152c3a34bf8266c577e1964e21f52b51e5c865b93",
-      "url": "https://github-raw.roojay.com/roojay520/bobplugin-google-translate/releases/download/v0.3.1/google-translate-v0.3.1.bobplugin",
+      "url": "https://github.roojay.com/roojay520/bobplugin-google-translate/releases/download/v0.3.1/google-translate-v0.3.1.bobplugin",
       "minBobVersion": "0.5.0"
     }
   ]
