@@ -2,6 +2,13 @@
   "identifier": "com.roojay.bobplugin-google-translate",
   "versions": [
     {
+      "version": "0.6.1",
+      "desc": "https://github.com/roojay520/bobplugin-google-translate/blob/master/CHANGELOG.md",
+      "sha256": "2eaf461d23adaa3c6fdcaf8cba8c9105d2fba99932787143f89cacaa6e5ad0fa",
+      "url": "https://github.roojay.com/roojay520/bobplugin-google-translate/releases/download/v0.6.1/google-translate-v0.6.1.bobplugin",
+      "minBobVersion": "0.5.0"
+    },
+    {
       "version": "0.6.0",
       "desc": "https://github.com/roojay520/bobplugin-google-translate/blob/master/CHANGELOG.md",
       "sha256": "2f931701d23a1d31a0ca9610b78ec42b9a1060f3eb1f674bc56d06ae592d5ead",
