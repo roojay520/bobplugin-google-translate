@@ -1,11 +1,12 @@
-# [0.6.0](https://github.com/roojay520/bobplugin-google-translate/compare/v0.5.0...v0.6.0) (2022-11-06)
+## [0.6.1](https://github.com/roojay520/bobplugin-google-translate/compare/v0.6.0...v0.6.1) (2022-11-06)
 
+
+
+# [0.6.0](https://github.com/roojay520/bobplugin-google-translate/compare/v0.5.0...v0.6.0) (2022-11-06)
 
 ### Features
 
-* 去掉一些失效的配置项, 新增基础 URL 自定义功能; ([47ae6e6](https://github.com/roojay520/bobplugin-google-translate/commit/47ae6e6efff87730dbf689f43970e74119957975))
-
-
+- 去掉一些失效的配置项, 新增基础 URL 自定义功能; ([47ae6e6](https://github.com/roojay520/bobplugin-google-translate/commit/47ae6e6efff87730dbf689f43970e74119957975))
 
 # [0.5.0](https://github.com/roojay520/bobplugin-google-translate/compare/v0.4.2...v0.5.0) (2021-10-29)
 
