@@ -3,6 +3,7 @@ import * as Bob from '@bob-plug/core';
 import { userAgent } from './util';
 import { IQueryOption, detectLang, tts } from './common';
 import { noStandardToStandard } from './lang';
+import { getBaseApi } from './common';
 
 var resultCache = new Bob.CacheResult();
 // 接口请求频率过快导致错误, 隔三分钟再请求
@@ -21,8 +22,8 @@ async function _translate(text: string, options: IQueryOption = {}) {
   }
   if (apiLimitErrorTime + API_LIMIT_TIME > Date.now()) throw Bob.util.error('api', '请求频率过快, 请稍后再试');
   apiLimitErrorTime = 0;
-  const { from = 'auto', to = 'auto', tld = 'cn', cache = 'enable', timeout = 10000 } = options;
-  const cacheKey = `${text}${from}${to}${tld}`;
+  const { from = 'auto', to = 'auto', cache = 'enable', timeout = 10000 } = options;
+  const cacheKey = `${text}${from}${to}${getBaseApi()}`;
   if (cache === 'enable') {
     const _cacheData = resultCache.get(cacheKey);
     if (_cacheData) return _cacheData;
@@ -47,7 +48,7 @@ async function _translate(text: string, options: IQueryOption = {}) {
 
   const [err, res] = await Bob.util.asyncTo<Bob.HttpResponse>(
     Bob.api.$http.post({
-      url: `https://translate.google.${tld}/translate_a/single?${querystring.stringify(data)}`,
+      url: `https://${getBaseApi()}/translate_a/single?${querystring.stringify(data)}`,
       timeout,
       header: {
         'User-Agent': userAgent,
@@ -89,7 +90,7 @@ async function _translate(text: string, options: IQueryOption = {}) {
         .map(([part, means]: [string, string[]]) => Bob.util.isArrayAndLenGt(means, 0) && { part, means })
         .filter((item: Bob.PartObject) => !!item);
       if (Bob.util.isArrayAndLenGt(parts, 0)) result.toDict.parts = parts;
-      const ttsUrl = tts(text, { tld, from: lang || from });
+      const ttsUrl = tts(text, { from: lang || from });
       result.fromTTS = { type: 'url', value: ttsUrl };
       result.toDict.phonetics = [{ type: 'us', value: '发音', tts: { type: 'url', value: ttsUrl, raw: {} } }];
     }

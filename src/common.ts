@@ -7,8 +7,18 @@ export interface IQueryOption {
   timeout?: number;
   to?: IGoogleLanguage;
   from?: IGoogleLanguage;
-  tld?: string;
   cache?: string;
+}
+
+function getBaseApi() {
+  let baseApi = 'translate.google.com';
+  let proxyApi = Bob.api.getOption('proxyApi');
+  proxyApi.replace(/^((https?):\/\/)/, '');
+  let urlRegexp = /([^!@#$%^&*?.\s-]([^!@#$%^&*?.\s]{0,63}[^!@#$%^&*?.\s])?\.)+[a-z]{2,6}\/?/;
+  if (urlRegexp.test(proxyApi)) {
+    return proxyApi;
+  }
+  return baseApi;
 }
 
 /**
@@ -18,7 +28,7 @@ export interface IQueryOption {
  * @return {string} 识别的语言类型
  */
 async function detectLang(text: string, options: IQueryOption = {}) {
-  const { tld = 'cn', timeout = 10000 } = options;
+  const { timeout = 10000 } = options;
   const query = {
     client: 'gtx',
     sl: 'auto',
@@ -26,9 +36,10 @@ async function detectLang(text: string, options: IQueryOption = {}) {
     ie: 'UTF-8',
     oe: 'UTF-8',
   };
+
   const [err, res] = await Bob.util.asyncTo<Bob.HttpResponse>(
     Bob.api.$http.post({
-      url: `https://translate.google.${tld}/translate_a/single?${querystring.stringify(query)}`,
+      url: `https://${getBaseApi()}/translate_a/single?${querystring.stringify(query)}`,
       timeout,
       header: { 'User-Agent': userAgent },
       body: { q: text },
@@ -48,7 +59,7 @@ async function detectLang(text: string, options: IQueryOption = {}) {
  * @return {string} tts 音频 url
  */
 function tts(text: string, options: IQueryOption = {}) {
-  const { from, tld = 'cn' } = options;
+  const { from } = options;
   const query = {
     client: 'gtx',
     tl: from,
@@ -60,7 +71,7 @@ function tts(text: string, options: IQueryOption = {}) {
     textlen: text.length,
     prev: 'input',
   };
-  return `https://translate.google.${tld}/translate_tts?${querystring.stringify(query)}`;
+  return `https://${getBaseApi()}/translate_tts?${querystring.stringify(query)}`;
 }
 
-export { detectLang, tts };
+export { detectLang, tts, getBaseApi };

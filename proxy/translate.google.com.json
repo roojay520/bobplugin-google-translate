@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "https://translate.google.com/$1",
+      "headers": {
+        "Cache-Control": "no-cache",
+        "Host": "translate.google.com",
+        "origin": "https://translate.google.com",
+        "referer": "https://translate.google.com/",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36"
+      }
+    }
+  ]
+}

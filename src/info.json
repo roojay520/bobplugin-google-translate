@@ -5,7 +5,7 @@
   "name": "Google 翻译",
   "summary": "Bob google 翻译插件",
   "author": "roojay <roojay520@gmail.com>",
-  "appcast": "https://github-raw.fe.workers.dev/roojay520/bobplugin-google-translate/master/src/appcast.json",
+  "appcast": "https://github-raw.roojay.com/roojay520/bobplugin-google-translate/master/src/appcast.json",
   "homepage": "https://github.com/roojay520/bobplugin-google-translate",
   "icon": "114",
   "minBobVersion": "0.5.0",
@@ -27,40 +27,27 @@
       ]
     },
     {
-      "identifier": "tld",
-      "type": "menu",
-      "title": "接口域名",
-      "defaultValue": "cn",
-      "menuValues": [
-        {
-          "title": "google.cn(国内)",
-          "value": "cn"
-        },
-        {
-          "title": "google.com(国际)",
-          "value": "com"
-        }
-      ]
-    },
-    {
       "identifier": "version",
       "type": "menu",
       "title": "接口版本",
       "defaultValue": "tmp",
       "menuValues": [
         {
-          "title": "WEB(国际可用)",
+          "title": "WEB(模拟调用网页版接口, 翻译结果和官网一致)",
           "value": "web"
         },
         {
-          "title": "RPC(国内/国际都可用)",
+          "title": "RPC(直接调用 RPC 接口, 段落翻译不太准确)",
           "value": "rpc"
-        },
-        {
-          "title": "混合版(国内/国际都可用,推荐)",
-          "value": "tmp"
         }
       ]
+    },
+    {
+      "identifier": "proxyApi",
+      "type": "text",
+      "title": "代理域名",
+      "desc": "如果你的网络环境需要代理才能访问 Google Translate, 可以在此填写代理域名, 格式形如: google-translate.proxy.com",
+      "defaultValue": ""
     }
   ]
 }

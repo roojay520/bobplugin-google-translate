@@ -3,6 +3,7 @@ import * as Bob from '@bob-plug/core';
 import { tts as _audio, IQueryOption } from './common';
 import { userAgent } from './util';
 import { noStandardToStandard } from './lang';
+import { getBaseApi } from './common';
 
 enum Rpc {
   translate = 'MkEWBc',
@@ -95,11 +96,11 @@ async function getRpcParams(rpcids: Rpc, opts: IQueryOption) {
   if (updateTime - cacheUpdateTime < time && params?.bl && params?.['f.sid']) {
     return params;
   }
-  const { tld = 'cn', timeout = 10000 } = opts;
+  const { timeout = 10000 } = opts;
   const [err, res] = await Bob.util.asyncTo<Bob.HttpResponse>(
     Bob.api.$http.get({
       timeout,
-      url: `https://translate.google.${tld}`,
+      url: `https://${getBaseApi()}`,
       header: {
         'User-Agent': userAgent,
         Cookie: '',
@@ -136,11 +137,11 @@ async function _translate(text: string, opts: IQueryOption = {}) {
   if (text?.length > 5000) {
     throw Bob.util.error('param', '翻译文本过长, 单次翻译字符上限为5000');
   }
-  const { from = 'auto', to = 'auto', tld = 'cn', cache = 'enable', timeout = 10000 } = opts;
-  const baseApi = `https://translate.google.${tld}`;
+  const { from = 'auto', to = 'auto', cache = 'enable', timeout = 10000 } = opts;
+  const baseApi = `https://${getBaseApi()}`;
   if (apiLimitErrorTime + API_LIMIT_TIME > Date.now()) throw Bob.util.error('api', '请求频率过快, 请稍后再试');
   apiLimitErrorTime = 0;
-  const cacheKey = `${text}${from}${to}${tld}`;
+  const cacheKey = `${text}${from}${to}${getBaseApi()}`;
   if (cache === 'enable') {
     const _cacheData = resultCache.get(cacheKey);
     if (_cacheData) return _cacheData;
@@ -182,7 +183,7 @@ async function _translate(text: string, opts: IQueryOption = {}) {
     if (Bob.util.isArrayAndLenGt(dict, 0)) {
       result.toDict = { parts: data.dict.parts, phonetics: [] };
 
-      const ttsUrl = _audio(text, { tld, from: from });
+      const ttsUrl = _audio(text, { from: from });
       result.fromTTS = { type: 'url', value: ttsUrl };
       const zh = ['zh-Hans', 'zh-Hant', 'zh-CN'];
       let pinyin = '发音';

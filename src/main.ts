@@ -6,24 +6,22 @@ import { _translate as translateByMobile } from './google-translate-mobile';
 
 var formatString = require('./libs/human-string');
 
-export function supportLanguages(): Bob.supportLanguages {
+function supportLanguages(): Bob.supportLanguages {
   return getSupportLanguages();
 }
 
 // https://ripperhe.gitee.io/bob/#/plugin/quickstart/translate
-export function translate(query: Bob.TranslateQuery, completion: Bob.Completion) {
+function translate(query: Bob.TranslateQuery, completion: Bob.Completion) {
   const { text = '', detectFrom, detectTo } = query;
   const str = formatString(text);
   const from = standardToNoStandard(detectFrom);
   const to = standardToNoStandard(detectTo);
-  const params = { from, to, tld: Bob.api.getOption('tld'), cache: Bob.api.getOption('cache') };
+  const params = { from, to, cache: Bob.api.getOption('cache') };
 
   const translateVersion = Bob.api.getOption('version');
   let res;
   if (translateVersion === 'rpc') {
     res = translateByRPC(str, params);
-  } else if (translateVersion === 'tmp') {
-    res = /[^\S\r\n]+/g.test(text) ? translateByMobile(str, params) : translateByRPC(str, params);
   } else {
     res = translateByWeb(str, params);
   }
@@ -36,3 +34,6 @@ export function translate(query: Bob.TranslateQuery, completion: Bob.Completion)
       completion({ error: Bob.util.error('api', '插件出错', error) });
     });
 }
+
+global.supportLanguages = supportLanguages;
+global.translate = translate;
