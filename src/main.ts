@@ -13,7 +13,12 @@ function supportLanguages(): Bob.supportLanguages {
 // https://ripperhe.gitee.io/bob/#/plugin/quickstart/translate
 function translate(query: Bob.TranslateQuery, completion: Bob.Completion) {
   const { text = '', detectFrom, detectTo } = query;
-  const str = formatString(text);
+
+  // https://github.com/roojay520/bobplugin-google-translate/issues/21
+  // 是否开启字符串分隔处理, 默认关闭(现在 Google Translate API 已经能很好的拆分)
+  const stringFmt = Bob.api.getOption('stringFmt') === 'enable';
+  const str = stringFmt ? formatString(text) : text;
+
   const from = standardToNoStandard(detectFrom);
   const to = standardToNoStandard(detectTo);
   const params = { from, to, cache: Bob.api.getOption('cache') };

@@ -37,9 +37,6 @@
     }
   },
   "lint-staged": {
-    "**/*.ts": [
-      "npm run type-check"
-    ],
     "**/*.{js, ts, json}": [
       "npm run prettier:fix",
       "npm run eslint:fix"

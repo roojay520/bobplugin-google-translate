@@ -48,6 +48,23 @@
       "title": "代理域名",
       "desc": "如果你的网络环境需要代理才能访问 Google Translate, 可以在此填写代理域名, 格式形如: google-translate.proxy.com",
       "defaultValue": ""
+    },
+    {
+      "identifier": "stringFmt",
+      "type": "menu",
+      "title": "字符串分隔",
+      "defaultValue": "disable",
+      "desc": "拆分驼峰/中划线/下划线格式的长字符串, 例如: fooBarBaz-intoString → foo Bar Baz - into String",
+      "menuValues": [
+        {
+          "title": "开启",
+          "value": "enable"
+        },
+        {
+          "title": "关闭",
+          "value": "disable"
+        }
+      ]
     }
   ]
 }
