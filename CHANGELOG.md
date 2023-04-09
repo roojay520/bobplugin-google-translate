@@ -1,3 +1,12 @@
+# [0.7.0](https://github.com/roojay520/bobplugin-google-translate/compare/v0.6.1...v0.7.0) (2023-04-09)
+
+
+### Bug Fixes
+
+* 将特殊字符串分隔作为可配置项, 默认关闭 issues [#21](https://github.com/roojay520/bobplugin-google-translate/issues/21) ([13fea9f](https://github.com/roojay520/bobplugin-google-translate/commit/13fea9f6bd168d7181af60a81a7e2edd01c6b435))
+
+
+
 ## [0.6.1](https://github.com/roojay520/bobplugin-google-translate/compare/v0.6.0...v0.6.1) (2022-11-06)
 
 
