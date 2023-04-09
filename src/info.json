@@ -1,7 +1,7 @@
 {
   "identifier": "com.roojay.bobplugin-google-translate",
   "category": "translate",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "name": "Google 翻译",
   "summary": "Bob google 翻译插件",
   "author": "roojay <roojay520@gmail.com>",

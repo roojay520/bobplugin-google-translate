@@ -1,3 +1,12 @@
+## [0.7.1](https://github.com/roojay520/bobplugin-google-translate/compare/v0.7.0...v0.7.1) (2023-04-09)
+
+
+### Bug Fixes
+
+* 修正版本更新文件地址的错误 ([6243b7e](https://github.com/roojay520/bobplugin-google-translate/commit/6243b7ec74ee960cbb308e410aa546c131a69ca7))
+
+
+
 # [0.7.0](https://github.com/roojay520/bobplugin-google-translate/compare/v0.6.1...v0.7.0) (2023-04-09)
 
 
